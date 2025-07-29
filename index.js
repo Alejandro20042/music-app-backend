@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
+
 const songsRoutes = require('./routes/song_api');
 const testRoutes = require('./routes/test_api');
+const fillTablesRoutes = require('./routes/fillTables'); // 👈 importar ruta
 
 const app = express();
 app.use(cors());
@@ -15,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/songs', songsRoutes);
 app.use('/api/test', testRoutes);
+app.use('/api', fillTablesRoutes); // 👈 montar la ruta de llenado
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
